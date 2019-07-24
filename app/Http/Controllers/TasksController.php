@@ -29,9 +29,6 @@ class TasksController extends Controller
      */
     public function create()
     {
-      // getでmessages/createにアクセスされた場合の「新規登録画面表示処理」
-    public function create()
-    {
         $task = new Task;
 
         return view('tasks.create', [
@@ -66,11 +63,11 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = new Task;
-        $task->content = $request->content;
-        $task->save();
+        $task = Task::find($id);
 
-        return redirect('/');
+        return view('tasks.show', [
+            'task' => $task,
+        ]);
     }
 
     /**
@@ -105,7 +102,7 @@ class TasksController extends Controller
         $task->content = $request->content;
         $task->save();
 
-        return redirect('/')
+        return redirect('/');
     }
 
     /**
